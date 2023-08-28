@@ -1,34 +1,29 @@
-import { Component } from 'react';
+import { useState } from 'react';
 import css from './ImageGalleryItem.module.css';
 import Modal from 'react-modal';
 
 Modal.setAppElement('#root');
 
-export class ImageGalleryItem extends Component {
-  state = {
-    isModalOpen: false,
-  }
-
-  modalToggle = () => {
-    this.setState((prevState) => ({
-      isModalOpen: !prevState.isModalOpen,
-    }));
+export const ImageGalleryItem = (props) => {
+  const { webformatURL, largeImageURL, tags } = props;
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  
+const modalToggle = () => {
+    setIsModalOpen((prevState) => !prevState);
   };
 
-  render() {
-    const { webformatURL, largeImageURL, tags } = this.props;
-
+ 
  return (
       <li className={css.imageGalleryItem}>
         <img
           src={webformatURL}
           alt='foto'
-          onClick={this.modalToggle}
+          onClick={modalToggle}
           className={css.imageGalleryItemImage}
         />
  <Modal
-          isOpen={this.state.isModalOpen}
-          onRequestClose={this.modalToggle}
+          isOpen={isModalOpen}
+          onRequestClose={modalToggle}
           style={{
                     content: {
                       top: '50%',
@@ -49,31 +44,6 @@ export class ImageGalleryItem extends Component {
         </Modal>
       </li>
     );
-  }
 }
 
 
-
-//  оставлил код ниже для примера
-
-    // return (
-    //   <li className={css.imageGalleryItem}>
-    //     <img
-    //       src={webformatURL}
-    //       alt="foto"
-    //       onClick={this.modalToggle} 
-    //       className={css.imageGalleryItemImage}
-    //     />
-    //     <Modal
-    //       isOpen={this.state.isModalOpen}
-    //       onRequestClose={this.modalToggle}
-    //     >
-    //       <div className={css.overlay} onClick={this.modalToggle}>
-    //         <div className={css.modal}>
-    //           <img onClick={() => onClick(largeImageURL)} src={largeImageURL} alt="foto" />
-    //         </div>
-    //       </div>
-    //     </Modal>
-    //   </li>
-    // );
-  
