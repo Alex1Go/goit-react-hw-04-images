@@ -15,7 +15,7 @@
     cursor: zoom-in;
 }
 
-.overlay {
+/* .overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -32,4 +32,4 @@
     max-width: calc(90vw - 48px);
     max-height: calc(90vh - 24px);
     overflow: scroll;
-}
+} */

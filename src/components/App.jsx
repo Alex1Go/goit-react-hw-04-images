@@ -3,7 +3,7 @@ import { ImageGallery } from "./ImageGallery/ImageGallery"
 import { Button } from "./Button/Button"
 import { fetchImages } from "api"
 import { Loader } from  './Loader/Loader'
-import { useEffect } from "react"
+import { useState, useEffect } from "react"
 
 export const App = () => {
   const [images, setImages] = useState([]);
@@ -12,13 +12,26 @@ export const App = () => {
   const [loading, setLoading] = useState(false);
   const [loadMore, setLoadMore] = useState(false);
 
-  
-  const  handleSearchSubmit = query => {
-    setQuery({ query, page: 1, images: [] });
+  useEffect(() => {
+    if (query === '') return;    
+    setLoading(true);
+    fetchImages(query, page)
+      .then(response => {
+        setImages(prevImages => [...prevImages, ...response.hits]);
+        setLoadMore(page < Math.ceil(response.totalHits / 12));
+      })
+      .catch(error => console.error("Error fetching images:", error))
+      .finally(() => setLoading(false));
+  }, [query, page])
+
+   const handleSearchSubmit = query => {
+    setQuery(query);
+    setPage(1); 
+    setImages([]); 
   };
 
   const   handleLoadMore = () => {
-    setPage((prevState) => prevState.page + 1 );
+    setPage(prevState => prevState + 1);
   }; 
     
     return (
