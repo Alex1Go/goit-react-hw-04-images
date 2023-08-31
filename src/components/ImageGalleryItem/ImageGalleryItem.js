@@ -2,12 +2,7 @@ import css from './ImageGalleryItem.module.css';
 import { WindowModal } from 'components/Modal/Modal';
 import { useState } from 'react';
 
-export const ImageGalleryItem = ({
-  webformatURL,
-  closeModal,
-  largeImageURL,
-  tags,
-}) => {
+export const ImageGalleryItem = ({ webformatURL, largeImageURL, tags }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const toggleModal = () => {
     setIsModalOpen(prevState => !prevState);
