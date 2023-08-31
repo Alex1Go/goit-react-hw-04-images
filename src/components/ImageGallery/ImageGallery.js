@@ -1,5 +1,5 @@
-import { ImageGalleryItem } from 'components/ImageGalleryItem/ImageGalleryItem'
-import css from './ImageGallery.module.css'
+import { ImageGalleryItem } from 'components/ImageGalleryItem/ImageGalleryItem';
+import css from './ImageGallery.module.css';
 
 export const ImageGallery = ({ images, onImageClick }) => {
   return (
@@ -10,6 +10,7 @@ export const ImageGallery = ({ images, onImageClick }) => {
           webformatURL={image.webformatURL}
           largeImageURL={image.largeImageURL}
           onClick={onImageClick}
+          tags={image.tags}
         />
       ))}
     </ul>
